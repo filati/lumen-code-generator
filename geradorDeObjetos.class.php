@@ -1,10 +1,9 @@
 <?php
 
 /**
- * Class geradorDeObjetos para sistema TEX/ICS;
+ * Class geradorDeObjetos
  *
- * @author Fabio Fila <fila@noxworks.com.br>
- * @copyright Nox Works <www.noxworks.com.br>
+ * @author Fabio Fila <contato@fabiofila.com.br
  */
 class geradorDeObjetos
 {
