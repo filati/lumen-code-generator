@@ -1,0 +1,425 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API Anfarmag",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/v1/admin/dummys": {
+            "get": {
+                "tags": [
+                    "Dummys"
+                ],
+                "summary": "Lista de Dummys",
+                "operationId": "App\\Http\\Controllers\\Admin\\DummysController::list",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "q",
+                        "schema": {
+                            "type": "string",
+                            "example": "q=termo"
+                        },
+                        "required": false,
+                        "description": "Busca geral"
+                    },
+                    {
+                        "in": "query",
+                        "name": "perPage",
+                        "schema": {
+                            "type": "integer",
+                            "example": "perPage=10",
+                            "default": 50
+                        },
+                        "required": false,
+                        "description": "Quantidade de registros por página"
+                    },
+                    {
+                        "in": "query",
+                        "name": "page",
+                        "schema": {
+                            "type": "integer",
+                            "example": "page=2",
+                            "default": 1
+                        },
+                        "required": false,
+                        "description": "Número da página onde se quer resgatar os dados"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "result": {
+                                            "type": "string",
+                                            "example": "success"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "example": [
+                                                {
+                                                    "uuid": "9096a225-3462-4722-841e-71d04a926489",
+                                                    "json_data": null,
+                                                    "created_at": "2021-10-02T18:49:41.000000Z",
+                                                    "updated_at": "2021-10-02T18:50:35.000000Z"
+                                                }
+                                            ]
+                                        },
+                                        "meta": {
+                                            "type": "object",
+                                            "example": {
+                                                "pagination": {
+                                                    "total": 1,
+                                                    "count": 1,
+                                                    "per_page": 15,
+                                                    "current_page": 1,
+                                                    "total_pages": 1,
+                                                    "links": {}
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "failed",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "result": {
+                                            "type": "string",
+                                            "example": "failed"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "unauthorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Dummys"
+                ],
+                "summary": "Cadastra um Dummy",
+                "operationId": "App\\Http\\Controllers\\Admin\\DummysController::create",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "action": {
+                                            "type": "string",
+                                            "example": "create"
+                                        },
+                                        "result": {
+                                            "type": "string",
+                                            "example": "success"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Inserido com sucesso"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "example": [
+                                                {
+                                                    "uuid": "9096a225-3462-4722-841e-71d04a926489",
+                                                    "json_data": null,
+                                                    "created_at": "2021-10-02T18:49:41.000000Z",
+                                                    "updated_at": "2021-10-02T18:49:41.000000Z"
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "409": {
+                        "description": "failed",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "entity": {
+                                            "type": "string",
+                                            "example": "dummys"
+                                        },
+                                        "action": {
+                                            "type": "string",
+                                            "example": "create"
+                                        },
+                                        "result": {
+                                            "type": "string",
+                                            "example": "failed"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "The given data was invalid."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "entity": {
+                                            "type": "string",
+                                            "example": "dummys"
+                                        },
+                                        "action": {
+                                            "type": "string",
+                                            "example": "create"
+                                        },
+                                        "result": {
+                                            "type": "string",
+                                            "example": "failed"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "unauthorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "Dummys"
+                ],
+                "summary": "Atualiza um Dummy",
+                "operationId": "App\\Http\\Controllers\\Admin\\DummysController::update",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "action": {
+                                            "type": "string",
+                                            "example": "create"
+                                        },
+                                        "result": {
+                                            "type": "string",
+                                            "example": "success"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Atualizado com sucesso"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "example": [
+                                                {
+                                                    "uuid": "9096a225-3462-4722-841e-71d04a926489",
+                                                    "json_data": null,
+                                                    "created_at": "2021-10-02T18:49:41.000000Z",
+                                                    "updated_at": "2021-10-02T18:50:35.000000Z"
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "409": {
+                        "description": "failed",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "entity": {
+                                            "type": "string",
+                                            "example": "dummys"
+                                        },
+                                        "action": {
+                                            "type": "string",
+                                            "example": "create"
+                                        },
+                                        "result": {
+                                            "type": "string",
+                                            "example": "failed"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "The given data was invalid."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "entity": {
+                                            "type": "string",
+                                            "example": "dummys"
+                                        },
+                                        "action": {
+                                            "type": "string",
+                                            "example": "create"
+                                        },
+                                        "result": {
+                                            "type": "string",
+                                            "example": "failed"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "unauthorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/admin/dummys/{uuid}": {
+            "delete": {
+                "tags": [
+                    "Dummys"
+                ],
+                "summary": "Remove um dummy",
+                "operationId": "App\\Http\\Controllers\\Admin\\DummysController::delete",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "action": {
+                                            "type": "string",
+                                            "example": "create"
+                                        },
+                                        "result": {
+                                            "type": "string",
+                                            "example": "success"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Excluído com sucesso!"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "409": {
+                        "description": "failed",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "entity": {
+                                            "type": "string",
+                                            "example": "dummy"
+                                        },
+                                        "action": {
+                                            "type": "string",
+                                            "example": "create"
+                                        },
+                                        "result": {
+                                            "type": "string",
+                                            "example": "failed"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "The given data was invalid."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "entity": {
+                                            "type": "string",
+                                            "example": "dummy"
+                                        },
+                                        "action": {
+                                            "type": "string",
+                                            "example": "create"
+                                        },
+                                        "result": {
+                                            "type": "string",
+                                            "example": "failed"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "unauthorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

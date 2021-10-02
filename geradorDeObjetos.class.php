@@ -27,7 +27,8 @@ class geradorDeObjetos
         'Repository',
         'Transform',
         'Controller',
-        'Router'
+        'Router',
+        'Swagger'
     ];
 
     /**
@@ -82,8 +83,8 @@ class geradorDeObjetos
         }
 
         $codigo = str_replace(
-            ['DummyTable','Dummy'],
-            [$table, $this->objeto],
+            ['DummyTable','Dummy', 'dummy'],
+            [$table, $this->objeto, strtolower($this->objeto)],
             $codigo
         );
 
@@ -97,7 +98,11 @@ class geradorDeObjetos
         if (!file_exists($pasta)) {
             mkdir($pasta, 0777, true);
         }
-        file_put_contents("{$pasta}{$objeto}{$tipo}.php", $codigo);
+        $ext = '.php';
+        if($tipo == 'Swagger'){
+            $ext = '.json';
+        }
+        file_put_contents("{$pasta}{$objeto}{$tipo}{$ext}", $codigo);
 
         return $retorno;
     }
@@ -118,6 +123,7 @@ class geradorDeObjetos
         $codigos['Repository'] = file_get_contents('stubs/DummyRepository.php');
         $codigos['Transform'] = file_get_contents('stubs/DummyTransform.php');
         $codigos['Router'] = file_get_contents('stubs/Router.php');
+        $codigos['Swagger'] = file_get_contents('stubs/api.json');
 
         return $codigos[$tipo];
     }
